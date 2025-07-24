@@ -40,7 +40,6 @@ function Jobs() {
                   <tr
                     className="hover:bg-gray-50 transition-colors hover:cursor-pointer"
                     key={index}
-                    // onClick={() => navigate(`/job/${job._id}`)}
                   >
                     <td className="py-4 px-6 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">

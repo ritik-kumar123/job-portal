@@ -2,11 +2,10 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 
 function AllApplicants() {
-  const { applicantsData } = useContext(AppContext);
+  const { applicantsData ,baseURL } = useContext(AppContext);
 
   useEffect(() => {
-    // console.log("Fetched applicantsData:", applicantsData);
-    // console.log("Fetched applicantsData:", applicantsData[0]);
+
   }, [applicantsData]);
 
   return (
@@ -72,7 +71,7 @@ function AllApplicants() {
                     </td>
                     <td className="py-4 px-6 whitespace-nowrap">
                        <a
-                        href={`http://localhost:4000/uploads/${item.applicants?.resume}`}
+                        href={`${baseURL}/uploads/${item.applicants?.resume}`}
                         target="_blank"
                         rel="noreferrer"
                         className="text-blue-600 underline"

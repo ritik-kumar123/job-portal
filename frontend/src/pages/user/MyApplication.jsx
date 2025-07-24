@@ -3,13 +3,13 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 function MyApplication() {
-  const { axios, navigate } = useContext(AppContext);
+  const { axios, navigate,baseURL} = useContext(AppContext);
   const [appliedJobs, setAppliedJobs] = useState([]);
 
   const fetchAppliedJobs = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/application/student-applications"
+        `${baseURL}/application/student-applications`
       );
       if (data.success) {
         setAppliedJobs(data.applications);

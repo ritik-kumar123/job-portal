@@ -3,13 +3,13 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 function Applicants() {
-  const { axios } = useContext(AppContext);
+  const { axios , baseURL} = useContext(AppContext);
   const [applicantsData, setApplicantsData] = useState([]);
 
   const fetchApplicants = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/application/employer-job-applicants"
+        `${baseURL}/application/employer-job-applicants`
       );
       if (data.success) {
         setApplicantsData(data.applications);
@@ -28,7 +28,7 @@ function Applicants() {
   const handleStatusChange = async (id, status) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:4000/application/update-status/${id}`,
+        `${baseURL}/application/update-status/${id}`,
         { status }
       );
       if (data.success) {
@@ -116,7 +116,7 @@ function Applicants() {
                       <td className="py-4 px-6 whitespace-nowrap">
                         {item.applicants?.resume ? (
                           <a
-                            href={`http://localhost:4000/uploads/${item.applicants.resume}`}
+                            href={`${baseURL}/uploads/${item.applicants.resume}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 hover:underline"

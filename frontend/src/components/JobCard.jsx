@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 
 const JobCard = ({ job }) => {
-  const { navigate } = useContext(AppContext);
+  const { navigate,baseURL } = useContext(AppContext);
 
   return (
     <div className="w-full flex justify-center">
@@ -15,7 +15,7 @@ const JobCard = ({ job }) => {
         <div className="flex justify-center mb-4 h-20">
           <img
             className="w-20 h-20 object-cover rounded-full border-2 border-indigo-300 group-hover:border-indigo-500 transition"
-            src={`http://localhost:4000/uploads/${job.company.logo}`}
+            src={`${baseURL}/uploads/${job.company.logo}`}
             alt="company logo"
           />
         </div>

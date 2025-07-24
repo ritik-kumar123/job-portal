@@ -6,7 +6,7 @@ import { assets } from "../../assets/assets";
 import { Menu, X } from "lucide-react"; // icon library
 
 const AdminLayout = () => {
-  const { navigate, setAdmin, axios,} = useContext(AppContext);
+  const { navigate, setAdmin, axios, baseURL} = useContext(AppContext);
   const [showSidebar, setShowSidebar] = useState(false);
   
   const sidebarLinks = [
@@ -20,7 +20,7 @@ const AdminLayout = () => {
 
   const logout = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/auth/logout");
+      const { data } = await axios.get(`${baseURL}/auth/logout`);
       if (data.success) {
         setAdmin(false);
         navigate("/");

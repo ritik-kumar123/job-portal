@@ -13,7 +13,7 @@ const Categories = () => {
     "bg-teal-100 text-teal-800",
   ];
 
-  const { categoriesData } = useContext(AppContext);
+  const { categoriesData,baseURL } = useContext(AppContext);
 
   return (
     <div className="py-16 px-4 md:px-8 bg-white">
@@ -30,7 +30,7 @@ const Categories = () => {
               className={`flex items-center gap-4 p-5 rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-transform hover:scale-[1.03] ${colorClass}`}
             >
               <img
-                src={`http://localhost:4000/uploads/${item.logo}`}
+                src={`${baseURL}/uploads/${item.logo}`}
                 alt={item.name}
                 className="w-14 h-14 rounded-full object-cover border"
               />

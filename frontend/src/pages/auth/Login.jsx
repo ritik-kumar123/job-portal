@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { navigate, setUser, setAdmin, axios } = useContext(AppContext);
+  const { navigate, setUser, setAdmin, axios, baseURL } = useContext(AppContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,7 +25,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:4000/auth/login",
+        `${baseURL}/auth/login`,
         formData
       );
       const data = response.data;

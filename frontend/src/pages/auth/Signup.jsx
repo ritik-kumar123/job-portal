@@ -4,9 +4,8 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 const Signup = () => {
-  const { navigate, axios } = useContext(AppContext);
+  const { navigate, axios , baseURL} = useContext(AppContext);
 
-  // const [file, setFile] = useState(null);
   const [preView, setPreView] = useState(null);
   const [formData, setFormData] = useState({
     name: "", 
@@ -25,7 +24,6 @@ const Signup = () => {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    // setFile(selectedFile);
     setFormData({ ...formData, image: selectedFile });
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
@@ -53,7 +51,7 @@ const Signup = () => {
       formPayload.append("image", formData.image);
 
       const { data } = await axios.post(
-        "http://localhost:4000/auth/signup",
+        `${baseURL}/auth/signup`,
         formPayload,
         {
           headers: {

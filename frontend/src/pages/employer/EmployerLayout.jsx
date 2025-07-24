@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 
 const EmployerLayout = () => {
 
-const {navigate,setUser,axios,user}=useContext(AppContext)
+const {navigate,setUser,axios,user,baseURL}=useContext(AppContext)
   const [showSidebar, setShowSidebar] = useState(false);
   
 
@@ -23,7 +23,7 @@ const {navigate,setUser,axios,user}=useContext(AppContext)
   {
     try 
     {
-      const {data}= await axios.get("http://localhost:4000/auth/logout");
+      const {data}= await axios.get(`${baseURL}/auth/logout`);
       if(data.success)
       {
         setUser(false);

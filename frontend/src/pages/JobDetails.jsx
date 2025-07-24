@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,baseURL } from "react";
 import { AppContext } from "../context/AppContext";
 import { useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
@@ -19,7 +19,7 @@ const JobDetails = () => {
     const checkIfApplied = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/application/student-applications"
+          `${baseURL}/application/student-applications`
         );
         const appliedJobIds = data.applications.map((app) => app.job._id);
         setIsApplied(appliedJobIds.includes(id));
@@ -35,7 +35,7 @@ const JobDetails = () => {
   const handleApplyJob = async () => {
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/application/apply/${job._id}`
+        `${baseURL}/application/apply/${job._id}`
       );
       if (data.success) {
         setIsApplied(true);
@@ -66,7 +66,7 @@ const JobDetails = () => {
         <div className="flex flex-col">
           <div className="flex items-center gap-5">
             <img
-              src={`http://localhost:4000/uploads/${job.company.logo}`}
+              src={`${baseURL}/uploads/${job.company.logo}`}
               alt=""
               className="w-[86px] h-[86px]"
             />

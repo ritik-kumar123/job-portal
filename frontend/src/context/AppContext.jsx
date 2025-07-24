@@ -9,7 +9,8 @@ export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
-
+  //backend url
+const baseURL = import.meta.env.VITE_API_URL;
   // ✅ Load from localStorage initially
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
@@ -31,7 +32,7 @@ const AppContextProvider = ({ children }) => {
   // ✅ Get currently logged-in user from backend and sync with localStorage
   const fetchloggedInuser = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/user/me");
+      const { data } = await axios.get(`${baseURL}/user/me`);
       if (data.success) {
         setUser(data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -56,7 +57,7 @@ const AppContextProvider = ({ children }) => {
   const fetchApplicants = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/application/all-applications"
+        `${baseURL}/application/all-applications`
       );
       if (data.success) {
         setApplicantsData(data.applications);
@@ -70,7 +71,7 @@ const AppContextProvider = ({ children }) => {
 
   const fetchCampanies = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/company/all");
+      const { data } = await axios.get(`${baseURL}/company/all`);
       if (data.success) {
         setCompanyData(data.companies);
       }
@@ -81,7 +82,7 @@ const AppContextProvider = ({ children }) => {
 
   const fetchCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/category/all");
+      const { data } = await axios.get(`${baseURL}/category/all`);
       if (data.success) {
         setCategoriesData(data.categories);
       }
@@ -94,7 +95,7 @@ const AppContextProvider = ({ children }) => {
 
   const fetchJobs = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/job/all");
+      const { data } = await axios.get(`${baseURL}/job/all`);
       if (data.success) {
         setJobsData(data.jobs);
       } else {
@@ -156,8 +157,9 @@ const AppContextProvider = ({ children }) => {
     companyData,
     setCompanyData,
     applicantsData,
+    baseURL,
     axios,
-    logout, // ✅ expose logout
+    logout,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

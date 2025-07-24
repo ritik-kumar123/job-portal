@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 function PostJob() {
-  const { navigate, axios } = useContext(AppContext);
+  const { navigate, axios ,baseURL } = useContext(AppContext);
 
   const [jobData, setJobData] = useState({
     title: "",
@@ -28,7 +28,7 @@ function PostJob() {
   const fetchCompanies = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/company/get-employer-companies"
+        `${baseURL}/company/get-employer-companies`
       );
       if (data.success) {
         setCompanies(data.companies);
@@ -51,7 +51,7 @@ function PostJob() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/job/post",
+        `${baseURL}/job/post`,
         jobData
       );
       if (data.success) {

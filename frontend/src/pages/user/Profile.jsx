@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 function Profile() {
-   const {user,axios,setUser} = useContext(AppContext)
+   const {user,axios,setUser ,baseURL} = useContext(AppContext)
     const [formData,setFormData] = useState({
         name:"",
         email:"",
@@ -61,7 +61,7 @@ function Profile() {
            formPayload.append("resume",formData.resume);
            formPayload.append("profileImage",formData.profileImage);
 
-           const {data}= await axios.put(`http://localhost:4000/user/update-profile/${user._id}`,
+           const {data}= await axios.put(`${baseURL}/user/update-profile/${user._id}`,
              formPayload,
             {
               headers:
@@ -90,7 +90,7 @@ function Profile() {
       <form onSubmit={handleSubmit} className="space-y-4">
         {formData.profileImage && (
           <img
-            src={`http://localhost:4000/uploads/${formData.profileImage}`}
+            src={`${baseURL}/uploads/${formData.profileImage}`}
             alt=""
             className="w-24 h-24 object-cover rounded-full mb-4"
           />
@@ -198,7 +198,7 @@ function Profile() {
         </div>
         {formData.resume && (
           <div className='mt-2'>
-            <a href={`http://localhost:4000/uploads/${formData.resume}`}
+            <a href={`${baseURL}/uploads/${formData.resume}`}
             target='_blank'
             rel='noopener noreferrer'
             className='text-blue-600 underline'

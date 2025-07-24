@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 function AddCompany() {
-  const { navigate ,axios } = useContext(AppContext);
+  const { navigate ,axios ,baseURL} = useContext(AppContext);
   const [companyData, setCompanyData] = useState({
     name: "",
     about: "",
@@ -34,7 +34,7 @@ function AddCompany() {
       formData.append("logo", companyData.logo);
 
       const { data } = await axios.post(
-        "http://localhost:4000/company/add",
+        `${baseURL}/company/add`,
         formData,
         {
           withCredentials: true,

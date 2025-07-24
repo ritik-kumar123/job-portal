@@ -1,14 +1,13 @@
 import React from 'react'
 import { useContext } from 'react'
 import { AppContext } from '../../context/AppContext'
-import Categories from '../../components/Categories'
 import toast from 'react-hot-toast'
 
 function CategoryList() {
-    const {categoriesData,setCategoriesData,axios}=useContext(AppContext)
+    const {categoriesData,setCategoriesData,axios,baseURL}=useContext(AppContext)
     const handleDelete = async (id) => {
         try {
-          await axios.delete(`http://localhost:4000/category/delete/${id}`);
+          await axios.delete(`${baseURL}/category/delete/${id}`);
           setCategoriesData(categoriesData.filter((category) => category._id !== id));
           toast.success("Category deleted successfully");
         } catch (error) {
@@ -35,7 +34,7 @@ function CategoryList() {
               <tr key={category._id} className="hover:bg-gray-50">
                 <td className="py-3 px-4 border-b">
                   <img
-                    src={`http://localhost:4000/uploads/${category.logo}`}
+                    src={`${baseURL}/uploads/${category.logo}`}
                     alt="category logo"
                     className="w-12 h-12 rounded object-cover border"
                   />

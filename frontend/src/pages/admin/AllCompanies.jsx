@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 function AllCompanies() {
-  const { companyData } = useContext(AppContext);
+  const { companyData ,baseURL } = useContext(AppContext);
 
   return (
     <div className="container mx-auto px-6 mt-10 bg-white shadow rounded-lg">
@@ -26,7 +26,7 @@ function AllCompanies() {
               <tr key={company._id} className="hover:bg-gray-50 ">
                 <td className="p-3 border-b ">
                   <img
-                    src={`http://localhost:4000/uploads/${company.logo}`}
+                    src={`${baseURL}/uploads/${company.logo}`}
                     alt=""
                     className="w-16 h-16 ml-3 object-cover border"
                   />

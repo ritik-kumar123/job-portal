@@ -3,12 +3,12 @@ import { AppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast';
 
 function JobsList() {
-  const {axios,navigate,user}=useContext(AppContext);
+  const {axios,user,baseURL}=useContext(AppContext);
   const [jobsData,setJobsData] =useState([]);
   const  fetchMyJobs = async()=>
     {
     try{
-    const {data} = await axios.get("http://localhost:4000/job/employer-jobs");
+    const {data} = await axios.get(`${baseURL}/job/employer-jobs`);
     if(data.success)
     {
       setJobsData(data.jobs);
@@ -33,7 +33,7 @@ const deleteJob = async (id, e) => {
   e.stopPropagation();
   try {
     const { data } = await axios.delete(
-      `http://localhost:4000/job/delete/${id}`
+      `${baseURL}/job/delete/${id}`
     );
     if (data.success) {
       toast.success("Job deleted successfully");
@@ -89,7 +89,6 @@ const deleteJob = async (id, e) => {
                   <tr
                     className="hover:bg-gray-50 transition-colors hover:cursor-pointer"
                     key={index}
-                    // onClick={() => navigate(`/job/${job._id}`)}
                   >
                     <td className="py-4 px-6 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">

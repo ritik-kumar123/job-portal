@@ -3,13 +3,13 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 function CompanyList() {
-  const { navigate, axios } = useContext(AppContext);
+  const { navigate, axios, baseURL } = useContext(AppContext);
   const [companyData, setCompanyData] = useState([]);
 
   const fetchCompanies = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/company/get-employer-companies"
+        `${baseURL}/company/get-employer-companies`
       );
       if (data.success) {
         setCompanyData(data.companies);
@@ -26,7 +26,7 @@ function CompanyList() {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:4000/company/delete/${id}`
+        `${baseURL}/company/delete/${id}`
       );
       if (data.success) {
         setCompanyData((prev) => prev.filter((company) => company._id !== id));
@@ -80,7 +80,7 @@ function CompanyList() {
               <tr key={company._id} className="hover:bg-gray-50">
                 <td className="p-3">
                   <img
-                    src={`http://localhost:4000/uploads/${company.logo}`}
+                    src={`${baseURL}/uploads/${company.logo}`}
                     alt=""
                     className="w-14 h-14 object-cover border rounded"
                   />

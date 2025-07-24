@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 function AddCategory() 
 {
-  const {navigate,axios}=useContext(AppContext);
+  const {navigate,axios,baseURL}=useContext(AppContext);
   const[categoryData, setcategoryData] = useState({
     name:"",
     logo: null,
@@ -38,7 +38,7 @@ function AddCategory()
       formPayload.append("logo", categoryData.logo);
 
       const { data } = await axios.post(
-        "http://localhost:4000/category/add",
+        `${baseURL}/category/add`,
         formPayload,
         {
           headers: {

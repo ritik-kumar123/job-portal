@@ -2,13 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 function AllUsers() {
-  const { axios } = useContext(AppContext);
+  const { axios ,baseURL} = useContext(AppContext);
   const [students, setStudents] = useState([]);
 
   const fetchAllUsers = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/user/all-students"
+        `${baseURL}/user/all-students`
       );
       if (data.success) {
         setStudents(data.students);
@@ -49,7 +49,7 @@ function AllUsers() {
                 <td className="p-4 py-2">
                   {student.image ? (
                     <img
-                      src={`http://localhost:4000/uploads/${student.image}`}
+                      src={`${baseURL}/uploads/${student.image}`}
                       alt="Profile"
                       className="h-10 w-10 rounded-full object-cover"
                     />
@@ -68,7 +68,7 @@ function AllUsers() {
                 <td className="p-4 py-2">
                   {student.resume ? (
                     <a
-                      href={`http://localhost:4000/uploads/${student.resume}`}
+                      href={`${baseURL}/uploads/${student.resume}`}
                       target="_blank"
                       rel="noreferrer"
                       className="text-blue-600 underline"
