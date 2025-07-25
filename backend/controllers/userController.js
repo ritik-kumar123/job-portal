@@ -63,13 +63,14 @@ export const updateProfile = async (req, res) => {
 };
 
 // ✅ Get all students
-export const getAllStudents = async (req, res) => {
-  try {
+export const getAllStudents = async (req, res) => 
+  {
+  try 
+  {
     const students = await User.find({ role: "student" }).select("-password");
     return res.json({ success: true, students });
   } catch (error) {
     console.error("Error fetching students:", error);
     return res.status(500).json({ success: false, message: "Internal server error" });
   }
-};
 };
